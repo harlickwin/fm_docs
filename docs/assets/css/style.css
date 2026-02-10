@@ -499,3 +499,195 @@ footer p {
         page-break-inside: avoid;
     }
 }
+
+/* Confidence Badges */
+.confidence-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.confidence-badge span:first-child {
+    display: block;
+    font-weight: 700;
+}
+
+.confidence-reason {
+    display: block;
+    font-size: 0.85rem;
+    margin-top: 4px;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.confidence-high {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 2px solid #10b981;
+}
+
+.confidence-medium {
+    background-color: #fef3c7;
+    color: #92400e;
+    border: 2px solid #f59e0b;
+}
+
+.confidence-low {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 2px solid #ef4444;
+}
+
+.confidence-unverified {
+    background-color: #f3f4f6;
+    color: #374151;
+    border: 2px solid #9ca3af;
+}
+
+/* Code References */
+.code-ref {
+    background: #f9fafb;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+}
+
+.code-ref strong {
+    color: var(--primary);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.code-ref ul {
+    list-style: none;
+    margin-left: 0;
+}
+
+.code-ref li {
+    padding: 0.25rem 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+}
+
+.code-ref code {
+    background: #e5e7eb;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.9rem;
+}
+
+/* Formula Cards */
+.formula-card {
+    background: #f8f9fa;
+    border-left: 4px solid var(--primary);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.formula-card h4 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.formula-readable,
+.formula-code,
+.formula-spreadsheet,
+.formula-variables,
+.formula-example {
+    margin: 1rem 0;
+}
+
+.formula-readable strong,
+.formula-code strong,
+.formula-spreadsheet strong,
+.formula-variables strong,
+.formula-example strong {
+    color: var(--dark);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.formula-code {
+    position: relative;
+}
+
+.formula-code pre {
+    background: #2d2d2d;
+    color: #f8f8f2;
+    padding: 1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    position: relative;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.copy-btn:hover {
+    background: var(--primary-dark);
+}
+
+.copy-btn:active {
+    transform: scale(0.95);
+}
+
+.formula-variables ul {
+    list-style: none;
+    padding-left: 0;
+    background: white;
+    border-radius: 6px;
+    padding: 1rem;
+}
+
+.formula-variables li {
+    padding: 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.formula-variables li:last-child {
+    border-bottom: none;
+}
+
+.formula-variables code {
+    background: #e5e7eb;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.formula-example {
+    background: #fef3c7;
+    padding: 1rem;
+    border-radius: 6px;
+    border-left: 4px solid var(--warning);
+}
+
+.hint {
+    font-size: 0.85rem;
+    color: #6b7280;
+    font-style: italic;
+    margin-left: 0.5rem;
+}

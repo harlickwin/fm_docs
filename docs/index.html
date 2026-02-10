@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Legend of Civilizations - Mechanics Guide</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/formulas.js" defer></script>
 </head>
 <body>
     <nav class="navbar">
@@ -47,67 +48,145 @@
             <h2 class="section-title">⚔️ Combat Mechanics</h2>
             
             <div class="mechanic-card">
-                <h3>Attack Speed</h3>
-                <div class="formula-box">
-                    <code>Effective Attack Time = Base Time / AttackSpeedMulti</code>
+                <div class="confidence-badge confidence-high">
+                    <span>Confidence: HIGH</span>
+                    <span class="confidence-reason">Combat classes and method signatures verified</span>
                 </div>
-                <p>Attack speed is a <strong>multiplier</strong> that reduces attack timing. Higher values = faster attacks.</p>
-                <div class="example">
-                    <strong>Example:</strong> Base attack 2.0s with 1.5x speed = 1.33s (33% faster)
-                </div>
-                <div class="sources">
-                    <strong>Sources:</strong> Equipment, Skills, Pets, Mounts, Tech Tree
+                <h3>Combat System Overview</h3>
+                <p><strong>Source:</strong> <code>AttacksSystem</code> (line 1057705), <code>UnitEntity</code> (line 1057581), <code>WeaponInfo</code> (line 1050834)</p>
+                
+                <div class="code-ref">
+                    <strong>Verified Combat Classes:</strong>
+                    <ul>
+                        <li><code>AttacksSystem</code> - Primary combat system (line 1057705)</li>
+                        <li><code>AttacksSystem.GetDamage(UnitEntity, CombatStats)</code> - Damage calculation method (line 1057726)</li>
+                        <li><code>UnitEntity</code> - Combat unit entity (line 1057581)</li>
+                        <li><code>WeaponInfo</code> - Weapon configuration (line 1050834)</li>
+                        <li><code>RandomPCG</code> - RNG for combat calculations (line 523666)</li>
+                    </ul>
                 </div>
             </div>
-
+            
             <div class="mechanic-card">
+                <div class="confidence-badge confidence-low">
+                    <span>Confidence: LOW</span>
+                    <span class="confidence-reason">Method signatures found but bodies not extractable (IL2CPP limitation)</span>
+                </div>
                 <h3>Damage Calculation</h3>
+                <p><strong>Source:</strong> <code>AttacksSystem.GetDamage()</code> (line 1057726)</p>
+                
                 <div class="formula-box">
+                    <h4>Method Signature (Verified)</h4>
+                    <code>private CombatDmg GetDamage(UnitEntity target, CombatStats attackStats)</code>
+                </div>
+                
+                <div class="warning">
+                    ❌ <strong>Formula Not Extractable:</strong> Method body is compiled to native ARM code
+                    <br><strong>Reason:</strong> IL2CPP limitation - method implementations not visible in dump.cs
+                    <br><strong>Potential Source:</strong> Native ARM code analysis (libil2cpp.so) or empirical testing
+                </div>
+                
+                <div class="info-box">
+                    <h4>What We Know:</h4>
+                    <ul>
+                        <li>✅ Damage calculation method exists and takes target + attack stats</li>
+                        <li>✅ Returns <code>CombatDmg</code> type</li>
+                        <li>✅ Uses <code>RandomPCG</code> for RNG-based calculations</li>
+                        <li>❌ Actual formula implementation not visible in IL2CPP dump</li>
+                    </ul>
+                </div>
+                
+                <div class="formula-box">
+                    <h4>General Combat Flow (Conceptual)</h4>
                     <ol>
-                        <li>Start with base damage</li>
-                        <li>Check for Critical Hit → Damage × CritMulti</li>
-                        <li>Check for Double Damage → Damage × 2</li>
+                        <li>Start with base damage from weapon/stats</li>
+                        <li>Check for Critical Hit → Apply crit multiplier</li>
+                        <li>Check for Double Damage → Apply 2x multiplier</li>
                         <li>Target checks Dodge → 0 damage if dodged</li>
                         <li>Target checks Block → 0 damage if blocked</li>
-                        <li>Calculate Life Steal → Heal = Damage × LifeSteal</li>
+                        <li>Calculate Life Steal → Heal = Damage × LifeSteal%</li>
                     </ol>
+                    <p><em>Note: Flow is conceptual based on typical game mechanics. Exact implementation requires ARM code analysis.</em></p>
                 </div>
-                <p><strong>Order matters!</strong> Crit and double damage can stack for massive hits.</p>
             </div>
 
             <div class="mechanic-card">
-                <h3>Critical Hits</h3>
+                <div class="confidence-badge confidence-high">
+                    <span>Confidence: HIGH</span>
+                    <span class="confidence-reason">WeaponInfo fields verified with complete structure</span>
+                </div>
+                <h3>Attack Speed & Timing</h3>
+                <p><strong>Source:</strong> <code>WeaponInfo</code> (line 1050834), <code>UnitEntity</code> (line 1057581)</p>
+                
+                <div class="code-ref">
+                    <strong>Verified Timing Fields:</strong>
+                    <ul>
+                        <li><code>WeaponInfo.AttackRange</code> - Weapon attack range (F64)</li>
+                        <li><code>WeaponInfo.WindupTime</code> - Attack windup duration (F64)</li>
+                        <li><code>WeaponInfo.AttackDuration</code> - Attack execution duration (F64)</li>
+                        <li><code>WeaponInfo.IsRanged</code> - Ranged weapon flag (bool)</li>
+                        <li><code>UnitEntity.AttackDuration</code> - Unit attack duration (F64)</li>
+                        <li><code>UnitEntity.WindUpDuration</code> - Unit windup duration (F64)</li>
+                    </ul>
+                </div>
+                
+                <div class="formula-box">
+                    <h4>Attack Timing Components</h4>
+                    <code>
+                        Total Attack Time = WindupTime + AttackDuration<br>
+                        Effective DPS = Damage / Total Attack Time
+                    </code>
+                    <p><em>Note: Attack speed multipliers likely modify these base timings, but calculation method not in dump.</em></p>
+                </div>
+            </div>
+
+            <div class="mechanic-card">
+                <div class="confidence-badge confidence-low">
+                    <span>Confidence: LOW</span>
+                    <span class="confidence-reason">Combat stat calculation methods not found in client code</span>
+                </div>
+                <h3>Critical Hits, Dodge, Block, Life Steal</h3>
+                
+                <div class="warning">
+                    ❌ <strong>Not Found in Code:</strong> Critical hit formula, dodge calculation, block calculation, life steal formula
+                    <br><strong>Searched:</strong> Patterns including <code>CriticalHit</code>, <code>CheckCrit</code>, <code>CheckDodge</code>, <code>CheckBlock</code>, <code>LifeSteal</code>
+                    <br><strong>Reason:</strong> Methods likely in native ARM code or server-side validation
+                </div>
+                
+                <div class="info-box">
+                    <h4>What We Know:</h4>
+                    <ul>
+                        <li>✅ <code>AttacksSystem</code> contains <code>RandomPCG</code> field for RNG</li>
+                        <li>✅ Combat uses deterministic RNG (same as summoning/drops)</li>
+                        <li>❌ Specific stat formulas not extractable from IL2CPP dump</li>
+                        <li>❌ Crit chance/multiplier calculations not visible</li>
+                        <li>❌ Dodge/block check logic not visible</li>
+                    </ul>
+                </div>
+                
                 <div class="stats-grid">
                     <div>
                         <strong>Critical Chance</strong>
-                        <p>Probability of landing a crit (5-50% typical)</p>
+                        <p>Probability of landing a crit</p>
+                        <p><em>Formula: Not in dump</em></p>
                     </div>
                     <div>
                         <strong>Critical Multiplier</strong>
-                        <p>Damage multiplier on crit (2.0x-5.0x typical)</p>
+                        <p>Damage multiplier on crit</p>
+                        <p><em>Formula: Not in dump</em></p>
                     </div>
-                </div>
-                <div class="tip">
-                    💡 <strong>Tip:</strong> High crit chance + high crit multiplier = massive DPS
-                </div>
-            </div>
-
-            <div class="mechanic-card">
-                <h3>Defensive Stats</h3>
-                <div class="stats-grid">
                     <div>
                         <strong>Dodge Chance</strong>
-                        <p>Checked FIRST - 100% damage avoidance</p>
-                        <p>Typical range: 5-30%</p>
+                        <p>100% damage avoidance</p>
+                        <p><em>Formula: Not in dump</em></p>
                     </div>
                     <div>
                         <strong>Block Chance</strong>
-                        <p>Checked SECOND - 100% damage avoidance</p>
-                        <p>Typical range: 10-40%</p>
+                        <p>100% damage avoidance</p>
+                        <p><em>Formula: Not in dump</em></p>
                     </div>
                 </div>
             </div>
-        </section>
 
         <!-- Summoning Section -->
         <section id="summoning" class="section">

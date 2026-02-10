@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>War & PvP - Legend of Civilizations</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <script src="assets/js/formulas.js" defer></script>
 </head>
 <body>
     <nav class="navbar">
@@ -31,77 +32,119 @@
         <section id="guild-war" class="section">
             <h2 class="section-title">🛡️ Guild War System</h2>
             
-            <div class="mechanic-card highlight">
-                <h3>Two-Week War Cycle (Dev Confirmed)</h3>
-                <p>Guild wars operate on a <strong>two-week matchmaking system</strong>:</p>
+            <div class="mechanic-card">
+                <div class="confidence-badge confidence-unverified">
+                    <span>Confidence: UNVERIFIED</span>
+                    <span class="confidence-reason">Two-week matchmaking cycle not found in client code - likely server-side</span>
+                </div>
+                <h3>Guild War Matchmaking</h3>
+                <p>The matchmaking algorithm for guild wars is <strong>not present in the client code</strong>. The client uses <code>LeagueClient&lt;GuildWarDivisionModel&gt;</code> to communicate with the server, which handles opponent selection.</p>
                 
-                <div class="info-box">
-                    <h4>Week 1: Random Tier Matchmaking</h4>
-                    <ul>
-                        <li>✅ Matched with <strong>random guild in your tier</strong></li>
-                        <li>✅ Tier based on guild tier points (S, A, B, C, D, E, F)</li>
-                        <li>✅ Power levels can vary significantly</li>
-                        <li>✅ Good for variety and learning</li>
-                    </ul>
+                <div class="warning">
+                    ❌ <strong>Not Found in Code:</strong> Two-week cycle logic, matchmaking algorithm, opponent selection criteria
+                    <br><strong>Searched:</strong> Patterns including <code>GuildWar.*Match</code>, <code>WarPoints</code>, <code>WeeklyCycle</code>
+                    <br><strong>Potential Source:</strong> Server-side matchmaking service
                 </div>
 
                 <div class="info-box">
-                    <h4>Week 2: War Points Matchmaking</h4>
+                    <h4>What We Know from Code:</h4>
                     <ul>
-                        <li>✅ Matched with guild <strong>close to your total war points</strong></li>
-                        <li>✅ More balanced matches</li>
-                        <li>✅ Competitive battles</li>
-                        <li>✅ Better for climbing tiers</li>
+                        <li>✅ Guild tiers exist: S, A, B, C, D, E, F (GuildTier enum)</li>
+                        <li>✅ Tier determined by guild tier points</li>
+                        <li>✅ Method exists: <code>GetTierFromTierPoints()</code> (line 1062576)</li>
+                        <li>❌ Actual matchmaking logic is server-side</li>
                     </ul>
                 </div>
             </div>
 
             <div class="mechanic-card">
+                <div class="confidence-badge confidence-medium">
+                    <span>Confidence: MEDIUM</span>
+                    <span class="confidence-reason">Class structure verified, but config values not in IL2CPP dump</span>
+                </div>
                 <h3>Guild Tiers</h3>
+                <p><strong>Source:</strong> <code>GuildTierConfig</code> (line 1062465), <code>GuildTier</code> enum</p>
+                
                 <table class="comparison-table">
                     <thead>
                         <tr>
                             <th>Tier</th>
                             <th>Required Points</th>
-                            <th>Win Reward</th>
-                            <th>Loss Reward</th>
+                            <th>Points on Win</th>
+                            <th>Points on Loss</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><strong>S Tier</strong></td>
-                            <td>TBD</td>
-                            <td>High rewards</td>
-                            <td>Medium rewards</td>
+                            <td>RequiredPoints*</td>
+                            <td>TierPointsOnWin*</td>
+                            <td>TierPointsOnLose*</td>
                         </tr>
                         <tr>
                             <td><strong>A Tier</strong></td>
-                            <td>TBD</td>
-                            <td>Good rewards</td>
-                            <td>Low rewards</td>
+                            <td>RequiredPoints*</td>
+                            <td>TierPointsOnWin*</td>
+                            <td>TierPointsOnLose*</td>
                         </tr>
                         <tr>
                             <td><strong>B-F Tiers</strong></td>
-                            <td>TBD</td>
-                            <td>Scaling rewards</td>
-                            <td>Scaling rewards</td>
+                            <td>RequiredPoints*</td>
+                            <td>TierPointsOnWin*</td>
+                            <td>TierPointsOnLose*</td>
                         </tr>
                     </tbody>
                 </table>
+                
+                <div class="code-ref">
+                    <strong>Code References:</strong>
+                    <ul>
+                        <li><code>GuildTierConfig.RequiredPoints</code> - Tier threshold (line 1062471)</li>
+                        <li><code>GuildTierConfig.TierPointsOnWin</code> - Points gained on victory (line 1062473)</li>
+                        <li><code>GuildTierConfig.TierPointsOnLose</code> - Points lost on defeat (line 1062475)</li>
+                        <li><code>GuildTierConfig.WarWonRewards</code> - Win rewards array (line 1062473)</li>
+                        <li><code>GuildTierConfig.WarLostRewards</code> - Loss rewards array (line 1062475)</li>
+                    </ul>
+                </div>
+                
                 <div class="warning">
-                    ⚠️ <strong>Note:</strong> Exact tier point thresholds need verification from game config files
+                    ⚠️ <strong>Missing Data:</strong> Field structure verified but actual values not in IL2CPP dump
+                    <br><strong>Potential Source:</strong> SharedGameConfig.mpa file or server configuration
                 </div>
             </div>
 
             <div class="mechanic-card">
+                <div class="confidence-badge confidence-medium">
+                    <span>Confidence: MEDIUM</span>
+                    <span class="confidence-reason">Configuration fields verified, but calculation logic is server-side</span>
+                </div>
                 <h3>War Points System</h3>
+                <p><strong>Source:</strong> <code>GuildWarConfig</code> (line 1062587)</p>
+                
+                <div class="code-ref">
+                    <strong>Verified Configuration Fields:</strong>
+                    <ul>
+                        <li><code>MaxWarTicketsPerMember</code> - Maximum battle tickets per member (line 1062591)</li>
+                        <li><code>MaxPointsForAttackingOpponentGuildMember</code> - Max points from attacking (line 1062593)</li>
+                        <li><code>MaxMembersDefeatedForReset</code> - Members defeated before reset (line 1062595)</li>
+                        <li><code>BrawlWinPointsReward</code> - Points awarded for brawl victory (line 1062597)</li>
+                        <li><code>MaxGuildTierPoints</code> - Maximum tier points cap (line 1062599)</li>
+                        <li><code>CoinsSpentOnForgeNeededToGrantOneActionReward</code> - Forge task threshold (line 1062597)</li>
+                    </ul>
+                </div>
+                
                 <ul>
-                    <li>🎯 <strong>Win:</strong> Gain tier points (amount varies by tier)</li>
-                    <li>📉 <strong>Loss:</strong> Lose tier points (smaller amount)</li>
-                    <li>⚖️ <strong>Matchmaking:</strong> Week 2 uses total war points for fair matches</li>
-                    <li>🏆 <strong>Tier Promotion:</strong> Reach tier threshold to move up</li>
+                    <li>🎯 <strong>Win:</strong> Gain tier points (TierPointsOnWin from GuildTierConfig)</li>
+                    <li>📉 <strong>Loss:</strong> Lose tier points (TierPointsOnLose from GuildTierConfig)</li>
+                    <li>🏆 <strong>Tier Promotion:</strong> Reach RequiredPoints threshold to move up</li>
                     <li>📊 <strong>Tier Demotion:</strong> Fall below threshold to move down</li>
+                    <li>⚔️ <strong>Battle Points:</strong> Capped at MaxPointsForAttackingOpponentGuildMember</li>
                 </ul>
+                
+                <div class="warning">
+                    ⚠️ <strong>Missing Data:</strong> Actual point calculation formulas are server-side
+                    <br><strong>Potential Source:</strong> Server-side battle resolution code
+                </div>
             </div>
 
             <div class="mechanic-card">
@@ -133,8 +176,12 @@
             <h2 class="section-title">⚔️ PvP Arena</h2>
             
             <div class="mechanic-card highlight">
+                <div class="confidence-badge confidence-high">
+                    <span>Confidence: HIGH</span>
+                    <span class="confidence-reason">Complete class structure verified with promotion/demotion fields</span>
+                </div>
                 <h3>Arena League System</h3>
-                <p>PvP uses a <strong>league and rank system</strong> with promotion/demotion thresholds.</p>
+                <p><strong>Source:</strong> <code>ArenaLeagueLibrary</code> (line 1056078)</p>
                 
                 <div class="formula-box">
                     <h4>League Structure</h4>
@@ -144,35 +191,60 @@
                     </code>
                 </div>
 
+                <div class="code-ref">
+                    <strong>Verified Fields:</strong>
+                    <ul>
+                        <li><code>LeagueId</code> - League identifier (int)</li>
+                        <li><code>PromotionEnd</code> - Rank threshold for promotion (int)</li>
+                        <li><code>DemotionStart</code> - Rank threshold for demotion (int)</li>
+                    </ul>
+                </div>
+
                 <div class="example">
-                    <strong>Example League:</strong><br>
+                    <strong>Example League Structure:</strong><br>
                     League 5: Ranks 1-100<br>
-                    - Top 20 (ranks 1-20) promote to League 6<br>
-                    - Bottom 20 (ranks 81-100) demote to League 4<br>
+                    - Top 20 (ranks 1-20) promote to League 6 (PromotionEnd = 20)<br>
+                    - Bottom 20 (ranks 81-100) demote to League 4 (DemotionStart = 81)<br>
                     - Middle 60 (ranks 21-80) stay in League 5
                 </div>
+                
+                <div class="warning">
+                    ⚠️ <strong>Note:</strong> Actual threshold values per league not in IL2CPP dump
+                    <br><strong>Potential Source:</strong> SharedGameConfig.mpa file or server configuration
+                </div>
             </div>
 
             <div class="mechanic-card">
+                <div class="confidence-badge confidence-low">
+                    <span>Confidence: LOW</span>
+                    <span class="confidence-reason">Matchmaking algorithm not found in client code - likely server-side</span>
+                </div>
                 <h3>Matchmaking Algorithm</h3>
-                <div class="info-box">
-                    <h4>How Opponents Are Selected:</h4>
-                    <ol>
-                        <li>Player enters PvP queue</li>
-                        <li>System searches for opponents within <strong>rating range</strong></li>
-                        <li>Rating range <strong>expands over time</strong> if no match found</li>
-                        <li>Level restrictions may apply</li>
-                        <li>Server-authoritative (can't manipulate)</li>
-                    </ol>
+                
+                <div class="warning">
+                    ❌ <strong>Not Found in Code:</strong> PvP matchmaking algorithm, rating range logic, opponent selection
+                    <br><strong>Searched:</strong> Patterns including <code>PvpMatchmaking</code>, <code>MatchmakingSystem</code>
+                    <br><strong>Potential Source:</strong> Server-side matchmaking service
                 </div>
-
-                <div class="tip">
-                    💡 <strong>Tip:</strong> If matchmaking takes long, you'll get matched with wider rating range
+                
+                <div class="info-box">
+                    <h4>What We Know:</h4>
+                    <ul>
+                        <li>✅ League structure exists (ArenaLeagueLibrary)</li>
+                        <li>✅ Promotion/demotion thresholds defined</li>
+                        <li>❌ Matchmaking algorithm is server-side</li>
+                        <li>❌ Rating range expansion logic not in client</li>
+                    </ul>
                 </div>
             </div>
 
             <div class="mechanic-card">
+                <div class="confidence-badge confidence-high">
+                    <span>Confidence: HIGH</span>
+                    <span class="confidence-reason">Complete PvP multiplier fields verified in PvpBaseConfig</span>
+                </div>
                 <h3>PvP Stat Modifications</h3>
+                <p><strong>Source:</strong> <code>PvpBaseConfig</code> (line 1074008)</p>
                 <p>PvP has <strong>separate stat multipliers</strong> for balance:</p>
                 
                 <table class="comparison-table">
@@ -180,35 +252,51 @@
                         <tr>
                             <th>Stat</th>
                             <th>PvE Value</th>
-                            <th>PvP Multiplier</th>
+                            <th>PvP Multiplier Field</th>
+                            <th>Line Reference</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Base HP</td>
                             <td>1.0x</td>
-                            <td>PvpHpBaseMultiplier</td>
+                            <td>PvpHpBaseMultiplier (F64)</td>
+                            <td>Line 1074008</td>
                         </tr>
                         <tr>
                             <td>Pet HP</td>
                             <td>1.0x</td>
-                            <td>PvpHpPetMultiplier</td>
+                            <td>PvpHpPetMultiplier (F64)</td>
+                            <td>Line 1074008</td>
                         </tr>
                         <tr>
                             <td>Skill HP</td>
                             <td>1.0x</td>
-                            <td>PvpHpSkillMultiplier</td>
+                            <td>PvpHpSkillMultiplier (F64)</td>
+                            <td>Line 1074008</td>
                         </tr>
                         <tr>
                             <td>Mount HP</td>
                             <td>1.0x</td>
-                            <td>PvpHpMountMultiplier</td>
+                            <td>PvpHpMountMultiplier (F64)</td>
+                            <td>Line 1074008</td>
                         </tr>
                     </tbody>
                 </table>
 
+                <div class="code-ref">
+                    <strong>Additional PvP Configuration Fields:</strong>
+                    <ul>
+                        <li><code>PvpMatchTimerSeconds</code> - Match duration timer (int)</li>
+                        <li><code>DailyArenaTickets</code> - Daily ticket allocation (int)</li>
+                        <li><code>GuildWarBattleMatchTimerSeconds</code> - Guild war battle timer (int)</li>
+                        <li><code>GuildWarMeleeHpScaling</code> - Guild war melee HP scaling (F64)</li>
+                    </ul>
+                </div>
+
                 <div class="warning">
-                    ⚠️ <strong>Note:</strong> Exact multiplier values need verification from PvpBaseConfig
+                    ⚠️ <strong>Note:</strong> Field structure verified but actual multiplier values not in IL2CPP dump
+                    <br><strong>Potential Source:</strong> SharedGameConfig.mpa file or server configuration
                 </div>
             </div>
 
@@ -228,62 +316,124 @@
         <section id="dungeons" class="section">
             <h2 class="section-title">🏰 Dungeon System</h2>
             
-            <div class="mechanic-card highlight">
-                <h3>Dungeon Level Scaling</h3>
-                <p>Dungeons scale with level, affecting:</p>
+            <div class="mechanic-card">
+                <div class="confidence-badge confidence-medium">
+                    <span>Confidence: MEDIUM</span>
+                    <span class="confidence-reason">Reward scaling fields verified, but HP/damage multipliers not found</span>
+                </div>
+                <h3>Dungeon Reward Scaling</h3>
+                <p><strong>Source:</strong> <code>DungeonRewardConfig</code> (line 1061177)</p>
                 
-                <div class="stats-grid">
-                    <div>
-                        <strong>Enemy HP</strong>
-                        <p>HP × DifficultyMultiplier</p>
-                        <p>Higher level = tankier enemies</p>
+                <div class="formula-box">
+                    <h4>Reward Formula (Inferred from Fields)</h4>
+                    <code>Reward = RewardBase + (Level × RewardIncrease)</code>
+                    <div class="code-ref">
+                        <strong>Fields:</strong>
+                        <ul>
+                            <li><code>RewardBase</code> - Base reward amount (F64[] array per currency type)</li>
+                            <li><code>RewardIncrease</code> - Reward increase per level (F64[] array per currency type)</li>
+                            <li><code>CurrencyType[]</code> - Types of currencies rewarded</li>
+                        </ul>
                     </div>
-                    <div>
-                        <strong>Enemy Damage</strong>
-                        <p>Damage × DifficultyMultiplier</p>
-                        <p>Higher level = harder hits</p>
-                    </div>
-                    <div>
-                        <strong>Coin Rewards</strong>
-                        <p>CoinsPerEnemy × Level</p>
-                        <p>Higher level = better rewards</p>
-                    </div>
-                    <div>
-                        <strong>Drop Chances</strong>
-                        <p>Better drops at higher levels</p>
-                        <p>Eggs, hammers, rare items</p>
-                    </div>
+                </div>
+                
+                <div class="warning">
+                    ⚠️ <strong>Note:</strong> Formula inferred from field structure. Actual calculation logic not visible in IL2CPP dump.
+                </div>
+            </div>
+            
+            <div class="mechanic-card">
+                <div class="confidence-badge confidence-low">
+                    <span>Confidence: LOW</span>
+                    <span class="confidence-reason">HP/Damage multiplier fields not found in client code</span>
+                </div>
+                <h3>Enemy Scaling (Missing Data)</h3>
+                
+                <div class="warning">
+                    ❌ <strong>Not Found in Code:</strong> Enemy HP multiplier, Enemy damage multiplier, DifficultyMultiplier class
+                    <br><strong>Searched:</strong> Patterns including <code>DifficultyMultiplier</code>, <code>DungeonLevel</code>, <code>EnemyHP</code>
+                    <br><strong>Potential Source:</strong> Server-side configuration, .mpa files, or native ARM code
+                </div>
+                
+                <div class="info-box">
+                    <h4>What We Know:</h4>
+                    <ul>
+                        <li>✅ <code>DungeonBaseConfig.MaxDungeonLevel</code> exists (line 1061151)</li>
+                        <li>✅ Reward scaling formula found (above)</li>
+                        <li>❌ Enemy stat scaling formulas not in client code</li>
+                        <li>❌ Difficulty multiplier values not found</li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="mechanic-card">
-                <h3>Egg Drop Mechanics & Seeding</h3>
-                <p>This is where it gets interesting with <strong>deterministic RNG</strong>:</p>
+            <div class="mechanic-card highlight">
+                <div class="confidence-badge confidence-high">
+                    <span>Confidence: HIGH</span>
+                    <span class="confidence-reason">Complete drop table structure verified with all rarity fields</span>
+                </div>
+                <h3>Egg Drop Mechanics & Seeded RNG</h3>
+                <p><strong>Source:</strong> <code>DungeonRewardEggConfig</code> (line 1071460), <code>RandomPCG</code> (line 523666)</p>
                 
                 <div class="info-box">
                     <h4>How Dungeon Level Affects Egg Quality:</h4>
                     <ol>
-                        <li><strong>Your seed stays the same</strong> (predetermined sequence)</li>
-                        <li><strong>Dungeon level changes drop table</strong> (better odds)</li>
+                        <li><strong>Your seed stays the same</strong> (predetermined sequence via RandomPCG)</li>
+                        <li><strong>Dungeon level changes drop table</strong> (DungeonRewardEggConfig per level)</li>
                         <li><strong>Same random value, different result!</strong></li>
                     </ol>
                 </div>
 
+                <div class="code-ref">
+                    <strong>Verified Classes:</strong>
+                    <ul>
+                        <li><code>DungeonRewardEggConfig</code> - Drop chance config by level (line 1071460)</li>
+                        <li><code>RandomPCG</code> - PCG (Permuted Congruential Generator) RNG algorithm (line 523666)</li>
+                        <li><code>DungeonEggRewardHelper.RollEggRarity()</code> - Rarity roll method (line 1061466)</li>
+                    </ul>
+                </div>
+
+                <div class="code-ref">
+                    <strong>Drop Table Fields (per level):</strong>
+                    <ul>
+                        <li><code>Level</code> - Dungeon level</li>
+                        <li><code>Common</code> - Common drop chance (F64)</li>
+                        <li><code>Rare</code> - Rare drop chance (F64)</li>
+                        <li><code>Epic</code> - Epic drop chance (F64)</li>
+                        <li><code>Legendary</code> - Legendary drop chance (F64)</li>
+                        <li><code>Ultimate</code> - Ultimate drop chance (F64)</li>
+                        <li><code>Mythic</code> - Mythic drop chance (F64)</li>
+                    </ul>
+                    <p><em>Note: F64 = Fixed-point decimal for precise probability calculations</em></p>
+                </div>
+            </div>
+
+            <div class="mechanic-card">
+                <div class="confidence-badge confidence-medium">
+                    <span>Confidence: MEDIUM</span>
+                    <span class="confidence-reason">Structure verified but actual drop chance values not in IL2CPP dump</span>
+                </div>
+                <h3>How It Works (Conceptual Example)</h3>
+                
                 <div class="formula-box">
                     <h4>Example: Moving from Dungeon 10 → Dungeon 20</h4>
                     <code>
-                        Your Seed: 12345 (never changes)<br>
+                        Your Seed: 12345 (never changes - RandomPCG)<br>
                         Random Value: 0.45 (45%)<br>
                         <br>
-                        Dungeon 10 Drop Table:<br>
+                        Dungeon 10 Drop Table (DungeonRewardEggConfig Level=10):<br>
                         - Common: 0-60% → Result: Common ❌<br>
                         <br>
-                        Dungeon 20 Drop Table:<br>
+                        Dungeon 20 Drop Table (DungeonRewardEggConfig Level=20):<br>
                         - Common: 0-40%<br>
                         - Rare: 40-70% → Result: Rare ✅<br>
                         <br>
                         Same seed, same random value, BETTER RESULT!
                     </code>
+                </div>
+
+                <div class="warning">
+                    ⚠️ <strong>Note:</strong> Actual drop chance percentages per level not in IL2CPP dump
+                    <br><strong>Potential Source:</strong> SharedGameConfig.mpa file or server configuration
                 </div>
 
                 <div class="tip">
@@ -292,15 +442,20 @@
             </div>
 
             <div class="mechanic-card">
+                <div class="confidence-badge confidence-low">
+                    <span>Confidence: LOW</span>
+                    <span class="confidence-reason">Example values are illustrative - actual config values not in dump</span>
+                </div>
                 <h3>Practical Example: Improving Egg Odds</h3>
+                <p><em>Note: The following table uses illustrative percentages. Actual drop chance values per dungeon level are not in the IL2CPP dump.</em></p>
                 
                 <table class="comparison-table">
                     <thead>
                         <tr>
                             <th>Your Random Value</th>
-                            <th>Dungeon 10 Result</th>
-                            <th>Dungeon 30 Result</th>
-                            <th>Dungeon 50 Result</th>
+                            <th>Dungeon 10 Result*</th>
+                            <th>Dungeon 30 Result*</th>
+                            <th>Dungeon 50 Result*</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -339,6 +494,7 @@
 
                 <div class="warning">
                     ⚠️ <strong>Important:</strong> Your "lucky" and "unlucky" positions in the sequence stay the same - they just shift to better rarities!
+                    <br>* Values are illustrative examples showing the concept. Actual drop chances require config file analysis.
                 </div>
             </div>
 
@@ -384,23 +540,34 @@
         <section id="shop" class="section">
             <h2 class="section-title">🛒 Shop System</h2>
             
-            <div class="mechanic-card highlight">
-                <h3>Is Shop Seeded Too?</h3>
-                <p><strong>Needs Investigation</strong> - Shop refresh mechanics unclear from current data.</p>
+            <div class="mechanic-card">
+                <div class="confidence-badge confidence-low">
+                    <span>Confidence: LOW</span>
+                    <span class="confidence-reason">PlayerShopModel found but shop mechanics appear to be server-side</span>
+                </div>
+                <h3>Shop Mechanics Investigation</h3>
+                <p><strong>Source:</strong> <code>PlayerShopModel</code> (line 1066486)</p>
+                
+                <div class="warning">
+                    ❌ <strong>Not Found in Code:</strong> ShopRefreshConfig, ShopItem classes, ShopSeed, refresh mechanics
+                    <br><strong>Searched:</strong> Patterns including <code>ShopRefreshConfig</code>, <code>ShopItem.*</code>, <code>ShopSeed</code>
+                    <br><strong>Potential Source:</strong> Server-side shop management or configuration files
+                </div>
                 
                 <div class="info-box">
                     <h4>What We Know:</h4>
                     <ul>
-                        <li>✅ Shop has refresh system (ShopRefreshConfig)</li>
-                        <li>✅ Free daily refresh available</li>
-                        <li>✅ Paid refresh costs gems (increases per refresh)</li>
-                        <li>❓ Whether shop items are seeded (like eggs) is unknown</li>
-                        <li>❓ Refresh algorithm needs verification</li>
+                        <li>✅ <code>PlayerShopModel</code> exists (player's shop state) - line 1066486</li>
+                        <li>❌ Shop refresh configuration not found in client code</li>
+                        <li>❌ Shop item configurations not found in client code</li>
+                        <li>❌ No evidence of shop seeding mechanism in dump</li>
+                        <li>❌ Refresh cost logic not in client code</li>
                     </ul>
                 </div>
-
-                <div class="warning">
-                    ⚠️ <strong>To Confirm:</strong> Need to analyze ShopRefreshConfig and PlayerShopModel in detail
+                
+                <div class="info-box">
+                    <h4>Conclusion:</h4>
+                    <p>Shop mechanics appear to be primarily <strong>server-side</strong> or stored in configuration files not present in the IL2CPP dump. The client only maintains shop state via <code>PlayerShopModel</code>, but the actual shop generation, refresh logic, and item selection are handled by the server.</p>
                 </div>
             </div>
         </section>
