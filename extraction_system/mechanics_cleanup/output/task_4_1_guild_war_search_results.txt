@@ -1,0 +1,406 @@
+Task 4.1: Guild War Class Search Results
+================================================================================
+
+Search Date: 2026-02-10T23:54:47.611347
+Total Patterns Searched: 4
+Total Matches Found: 6
+
+Search Patterns:
+  - class GuildWar.*Config
+  - class GuildTier.*
+  - class.*War.*Match.*
+  - \bWarPoints\b
+
+Matches Found:
+--------------------------------------------------------------------------------
+
+Class: GuildWarConfig
+Line: 1062587
+File: C:\apktool\il2cpp-output\dump.cs
+
+Context:
+    1062582: 	public static GuildTier GetTierFromTierPoints(GameConfigLibrary<GuildTier, GuildTierConfig> configs, int points) { }
+    1062583: }
+    1062584: 
+    1062585: // Namespace: Game.Logic
+    1062586: [MetaSerializable]
+>>> 1062587: public class GuildWarConfig : GameConfigKeyValue<GuildWarConfig> // TypeDefIndex: 13322
+    1062588: {
+    1062589: 	// Fields
+    1062590: 	[CompilerGenerated]
+    1062591: 	private int <MaxWarTicketsPerMember>k__BackingField; // 0x8
+    1062592: 	[CompilerGenerated]
+    1062593: 	private int <MaxPointsForAttackingOpponentGuildMember>k__BackingField; // 0xC
+    1062594: 	[CompilerGenerated]
+    1062595: 	private int <MaxMembersDefeatedForReset>k__BackingField; // 0x10
+    1062596: 	[CompilerGenerated]
+    1062597: 	private int <CoinsSpentOnForgeNeededToGrantOneActionReward>k__BackingField; // 0x14
+
+Class Content:
+public class GuildWarConfig : GameConfigKeyValue<GuildWarConfig> // TypeDefIndex: 13322
+{
+	// Fields
+	[CompilerGenerated]
+	private int <MaxWarTicketsPerMember>k__BackingField; // 0x8
+	[CompilerGenerated]
+	private int <MaxPointsForAttackingOpponentGuildMember>k__BackingField; // 0xC
+	[CompilerGenerated]
+	private int <MaxMembersDefeatedForReset>k__BackingField; // 0x10
+	[CompilerGenerated]
+	private int <CoinsSpentOnForgeNeededToGrantOneActionReward>k__BackingField; // 0x14
+	[CompilerGenerated]
+	private int <BrawlWinPointsReward>k__BackingField; // 0x18
+	[CompilerGenerated]
+	private int <MaxGuildTierPoints>k__BackingField; // 0x1C
+
+	// Properties
+	[MetaMember(1, 0)]
+	public int MaxWarTicketsPerMember { get; set; }
+	[MetaMember(2, 0)]
+	public int MaxPointsForAttackingOpponentGuildMember { get; set; }
+	[MetaMember(4, 0)]
+	public int MaxMembersDefeatedForReset { get; set; }
+	[MetaMember(5, 0)]
+	public int CoinsSpentOnForgeNeededToGrantOneActionReward { get; set; }
+	[MetaMember(6, 0)]
+	public int BrawlWinPointsReward { get; set; }
+	[MetaMember(7, 0)]
+	public int MaxGuildTierPoints { get; set; }
+
+	// Methods
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D7FC Offset: 0x5B0D7FC VA: 0x5B0D7FC
+	public int get_MaxWarTicketsPerMember() { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D804 Offset: 0x5B0D804 VA: 0x5B0D804
+	private void set_MaxWarTicketsPerMember(int value) { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D80C Offset: 0x5B0D80C VA: 0x5B0D80C
+	public int get_MaxPointsForAttackingOpponentGuildMember() { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D814 Offset: 0x5B0D814 VA: 0x5B0D814
+	private void set_MaxPointsForAttackingOpponentGuildMember(int value) { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D81C Offset: 0x5B0D81C VA: 0x5B0D81C
+	public int get_MaxMembersDefeatedForReset() { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D824 Offset: 0x5B0D824 VA: 0x5B0D824
+	private void set_MaxMembersDefeatedForReset(int value) { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D82C Offset: 0x5B0D82C VA: 0x5B0D82C
+	public int get_CoinsSpentOnForgeNeededToGrantOneActionReward() { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D834 Offset: 0x5B0D834 VA: 0x5B0D834
+	private void set_CoinsSpentOnForgeNeededToGrantOneActionReward(int value) { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D83C Offset: 0x5B0D83C VA: 0x5B0D83C
+	public int get_BrawlWinPointsReward() { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D844 Offset: 0x5B0D844 VA: 0x5B0D844
+	private void set_BrawlWinPointsReward(int value) { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D84C Offset: 0x5B0D84C VA: 0x5B0D84C
+	public int get_MaxGuildTierPoints() { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D854 Offset: 0x5B0D854 VA: 0x5B0D854
+	private void set_MaxGuildTierPoints(int value) { }
+
+	// RVA: 0x5B0D860 Offset: 0x5B0D860 VA: 0x5B0D860
+	public void .ctor() { }
+}
+
+================================================================================
+
+Class: GuildTierRewardsPopupUiView
+Line: 719695
+File: C:\apktool\il2cpp-output\dump.cs
+
+Context:
+    719690: 	// RVA: 0x1F92184 Offset: 0x1F92184 VA: 0x1F92184
+    719691: 	public void .ctor() { }
+    719692: }
+    719693: 
+    719694: // Namespace:
+>>> 719695: public class GuildTierRewardsPopupUiView : MonoBehaviour // TypeDefIndex: 6925
+    719696: {
+    719697: 	// Fields
+    719698: 	public TMP_Text TitleText; // 0x10
+    719699: 	public ArenaRewardGridVisual WinRewards; // 0x14
+    719700: 	public ArenaRewardGridVisual LoseRewards; // 0x18
+    719701: 	public UnityButton InfoButton; // 0x1C
+    719702: 	private GuildWarManager _warManager; // 0x20
+    719703: 
+    719704: 	// Methods
+    719705: 
+
+Class Content:
+public class GuildTierRewardsPopupUiView : MonoBehaviour // TypeDefIndex: 6925
+{
+	// Fields
+	public TMP_Text TitleText; // 0x10
+	public ArenaRewardGridVisual WinRewards; // 0x14
+	public ArenaRewardGridVisual LoseRewards; // 0x18
+	public UnityButton InfoButton; // 0x1C
+	private GuildWarManager _warManager; // 0x20
+
+	// Methods
+
+	// RVA: 0x1F9218C Offset: 0x1F9218C VA: 0x1F9218C
+	private void Start() { }
+
+	// RVA: 0x1F925B8 Offset: 0x1F925B8 VA: 0x1F925B8
+	private void OpenTiersInfo() { }
+
+	// RVA: 0x1F92624 Offset: 0x1F92624 VA: 0x1F92624
+	public void .ctor() { }
+}
+
+================================================================================
+
+Class: GuildTiersPopupUiView
+Line: 719717
+File: C:\apktool\il2cpp-output\dump.cs
+
+Context:
+    719712: 	// RVA: 0x1F92624 Offset: 0x1F92624 VA: 0x1F92624
+    719713: 	public void .ctor() { }
+    719714: }
+    719715: 
+    719716: // Namespace:
+>>> 719717: public class GuildTiersPopupUiView : MonoBehaviour // TypeDefIndex: 6926
+    719718: {
+    719719: 	// Fields
+    719720: 	public SummonUpgradeEntry TierEntryPrefab; // 0x10
+    719721: 	public RectTransform Parent; // 0x14
+    719722: 	public TMP_Text SubtitleText; // 0x18
+    719723: 	private GuildWarManager _warManager; // 0x1C
+    719724: 
+    719725: 	// Methods
+    719726: 
+    719727: 	// RVA: 0x1F9262C Offset: 0x1F9262C VA: 0x1F9262C
+
+Class Content:
+public class GuildTiersPopupUiView : MonoBehaviour // TypeDefIndex: 6926
+{
+	// Fields
+	public SummonUpgradeEntry TierEntryPrefab; // 0x10
+	public RectTransform Parent; // 0x14
+	public TMP_Text SubtitleText; // 0x18
+	private GuildWarManager _warManager; // 0x1C
+
+	// Methods
+
+	// RVA: 0x1F9262C Offset: 0x1F9262C VA: 0x1F9262C
+	private void Start() { }
+
+	// RVA: 0x1F9281C Offset: 0x1F9281C VA: 0x1F9281C
+	private void PopulateTiers() { }
+
+	// RVA: 0x1F92DD4 Offset: 0x1F92DD4 VA: 0x1F92DD4
+	public void .ctor() { }
+}
+
+================================================================================
+
+Class: GuildTierConfig
+Line: 1062465
+File: C:\apktool\il2cpp-output\dump.cs
+
+Context:
+    1062460: 	public const GuildTier F = 6;
+    1062461: }
+    1062462: 
+    1062463: // Namespace: Game.Logic
+    1062464: [MetaSerializable]
+>>> 1062465: public class GuildTierConfig : IGameConfigData<GuildTier>, IGameConfigData, IHasGameConfigKey<GuildTier> // TypeDefIndex: 13319
+    1062466: {
+    1062467: 	// Fields
+    1062468: 	[CompilerGenerated]
+    1062469: 	private GuildTier <Tier>k__BackingField; // 0x8
+    1062470: 	[CompilerGenerated]
+    1062471: 	private int <RequiredPoints>k__BackingField; // 0xC
+    1062472: 	[CompilerGenerated]
+    1062473: 	private PlayerReward[] <WarWonRewards>k__BackingField; // 0x10
+    1062474: 	[CompilerGenerated]
+    1062475: 	private PlayerReward[] <WarLostRewards>k__BackingField; // 0x14
+
+Class Content:
+public class GuildTierConfig : IGameConfigData<GuildTier>, IGameConfigData, IHasGameConfigKey<GuildTier> // TypeDefIndex: 13319
+{
+	// Fields
+	[CompilerGenerated]
+	private GuildTier <Tier>k__BackingField; // 0x8
+	[CompilerGenerated]
+	private int <RequiredPoints>k__BackingField; // 0xC
+	[CompilerGenerated]
+	private PlayerReward[] <WarWonRewards>k__BackingField; // 0x10
+	[CompilerGenerated]
+	private PlayerReward[] <WarLostRewards>k__BackingField; // 0x14
+	[CompilerGenerated]
+	private int <TierPointsOnWin>k__BackingField; // 0x18
+	[CompilerGenerated]
+	private int <TierPointsOnLose>k__BackingField; // 0x1C
+
+	// Properties
+	[MetaMember(1, 0)]
+	public GuildTier Tier { get; set; }
+	[MetaMember(2, 0)]
+	public int RequiredPoints { get; set; }
+	[MetaMember(3, 0)]
+	public PlayerReward[] WarWonRewards { get; set; }
+	[MetaMember(4, 0)]
+	public PlayerReward[] WarLostRewards { get; set; }
+	[MetaMember(5, 0)]
+	public int TierPointsOnWin { get; set; }
+	[MetaMember(6, 0)]
+	public int TierPointsOnLose { get; set; }
+	public GuildTier ConfigKey { get; }
+
+	// Methods
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D2B4 Offset: 0x5B0D2B4 VA: 0x5B0D2B4
+	public GuildTier get_Tier() { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D2BC Offset: 0x5B0D2BC VA: 0x5B0D2BC
+	private void set_Tier(GuildTier value) { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D2C4 Offset: 0x5B0D2C4 VA: 0x5B0D2C4
+	public int get_RequiredPoints() { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D2CC Offset: 0x5B0D2CC VA: 0x5B0D2CC
+	private void set_RequiredPoints(int value) { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D2D4 Offset: 0x5B0D2D4 VA: 0x5B0D2D4
+	public PlayerReward[] get_WarWonRewards() { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D2DC Offset: 0x5B0D2DC VA: 0x5B0D2DC
+	private void set_WarWonRewards(PlayerReward[] value) { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D2E4 Offset: 0x5B0D2E4 VA: 0x5B0D2E4
+	public PlayerReward[] get_WarLostRewards() { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D2EC Offset: 0x5B0D2EC VA: 0x5B0D2EC
+	private void set_WarLostRewards(PlayerReward[] value) { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D2F4 Offset: 0x5B0D2F4 VA: 0x5B0D2F4
+	public int get_TierPointsOnWin() { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D2FC Offset: 0x5B0D2FC VA: 0x5B0D2FC
+	private void set_TierPointsOnWin(int value) { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D304 Offset: 0x5B0D304 VA: 0x5B0D304
+	public int get_TierPointsOnLose() { }
+
+	[CompilerGenerated]
+	// RVA: 0x5B0D30C Offset: 0x5B0D30C VA: 0x5B0D30C
+	private void set_TierPointsOnLose(int value) { }
+
+	// RVA: 0x5B0D314 Offset: 0x5B0D314 VA: 0x5B0D314 Slot: 4
+	public GuildTier get_ConfigKey() { }
+
+	// RVA: 0x5B0D31C Offset: 0x5B0D31C VA: 0x5B0D31C
+	public void .ctor() { }
+}
+
+================================================================================
+
+Class: GuildTierExtensions
+Line: 1062556
+File: C:\apktool\il2cpp-output\dump.cs
+
+Context:
+    1062551: }
+    1062552: 
+    1062553: // Namespace:
+    1062554: [CompilerGenerated]
+    1062555: [Serializable]
+>>> 1062556: private sealed class GuildTierExtensions.<>c // TypeDefIndex: 13320
+    1062557: {
+    1062558: 	// Fields
+    1062559: 	public static readonly GuildTierExtensions.<>c <>9; // 0x0
+    1062560: 	public static Func<KeyValuePair<GuildTier, GuildTierConfig>, int> <>9__0_0; // 0x4
+    1062561: 
+    1062562: 	// Methods
+    1062563: 
+    1062564: 	// RVA: 0x5B0D744 Offset: 0x5B0D744 VA: 0x5B0D744
+    1062565: 	private static void .cctor() { }
+    1062566: 
+
+Class Content:
+private sealed class GuildTierExtensions.<>c // TypeDefIndex: 13320
+{
+	// Fields
+	public static readonly GuildTierExtensions.<>c <>9; // 0x0
+	public static Func<KeyValuePair<GuildTier, GuildTierConfig>, int> <>9__0_0; // 0x4
+
+	// Methods
+
+	// RVA: 0x5B0D744 Offset: 0x5B0D744 VA: 0x5B0D744
+	private static void .cctor() { }
+
+	// RVA: 0x5B0D7A8 Offset: 0x5B0D7A8 VA: 0x5B0D7A8
+	public void .ctor() { }
+
+	// RVA: 0x5B0D7B0 Offset: 0x5B0D7B0 VA: 0x5B0D7B0
+	internal int <GetTierFromTierPoints>b__0_0(KeyValuePair<GuildTier, GuildTierConfig> c) { }
+}
+
+================================================================================
+
+Class: GuildTierExtensions
+Line: 1062576
+File: C:\apktool\il2cpp-output\dump.cs
+
+Context:
+    1062571: 	internal int <GetTierFromTierPoints>b__0_0(KeyValuePair<GuildTier, GuildTierConfig> c) { }
+    1062572: }
+    1062573: 
+    1062574: // Namespace: Game.Logic
+    1062575: [Extension]
+>>> 1062576: public static class GuildTierExtensions // TypeDefIndex: 13321
+    1062577: {
+    1062578: 	// Methods
+    1062579: 
+    1062580: 	[Extension]
+    1062581: 	// RVA: 0x5B0D324 Offset: 0x5B0D324 VA: 0x5B0D324
+    1062582: 	public static GuildTier GetTierFromTierPoints(GameConfigLibrary<GuildTier, GuildTierConfig> configs, int points) { }
+    1062583: }
+    1062584: 
+    1062585: // Namespace: Game.Logic
+    1062586: [MetaSerializable]
+
+Class Content:
+public static class GuildTierExtensions // TypeDefIndex: 13321
+{
+	// Methods
+
+	[Extension]
+	// RVA: 0x5B0D324 Offset: 0x5B0D324 VA: 0x5B0D324
+	public static GuildTier GetTierFromTierPoints(GameConfigLibrary<GuildTier, GuildTierConfig> configs, int points) { }
+}
+
+================================================================================
+

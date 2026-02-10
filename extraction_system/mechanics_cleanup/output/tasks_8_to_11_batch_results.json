@@ -1,0 +1,106 @@
+{
+  "task_8_1_pvp_search": {
+    "class Pvp.*Config": [
+      {
+        "class_name": "PvpBaseConfig",
+        "line": 1074008
+      }
+    ],
+    "class.*League.*Config": [
+      {
+        "class_name": "LeagueVisualConfig",
+        "line": 705002
+      },
+      {
+        "class_name": "ArenaLeagueLibrary",
+        "line": 1056078
+      }
+    ],
+    "PromotionEnd": [],
+    "DemotionStart": [],
+    "PvpMatchmaking": []
+  },
+  "task_8_2_league_extraction": {
+    "PvpBaseConfig": {
+      "line": 1074008,
+      "has_promotion": false,
+      "has_demotion": false,
+      "has_matchmaking": true,
+      "confidence": "MEDIUM",
+      "notes": "Class structure found but specific threshold values may be in config files"
+    },
+    "LeagueVisualConfig": {
+      "line": 705002,
+      "has_promotion": false,
+      "has_demotion": false,
+      "has_matchmaking": false,
+      "confidence": "MEDIUM",
+      "notes": "Class structure found but specific threshold values may be in config files"
+    },
+    "ArenaLeagueLibrary": {
+      "line": 1056078,
+      "has_promotion": true,
+      "has_demotion": true,
+      "has_matchmaking": false,
+      "confidence": "MEDIUM",
+      "notes": "Class structure found but specific threshold values may be in config files"
+    }
+  },
+  "task_9_1_shop_search": {
+    "class ShopRefreshConfig": [],
+    "class PlayerShopModel": [
+      {
+        "class_name": "PlayerShopModel",
+        "line": 1066486
+      }
+    ],
+    "class ShopItem.*": [],
+    "ShopSeed": []
+  },
+  "task_9_2_shop_mechanics": {
+    "PlayerShopModel": {
+      "line": 1066486,
+      "has_seed": false,
+      "has_refresh": false,
+      "has_cost": false,
+      "confidence": "LOW",
+      "notes": "Class structure found. Seeding mechanism unclear from class alone."
+    }
+  },
+  "task_10_1_combat_search": {
+    "class AttacksSystem": [
+      {
+        "class_name": "AttacksSystem",
+        "line": 1057705
+      }
+    ],
+    "class UnitEntity": [
+      {
+        "class_name": "UnitEntityReactiveModel",
+        "line": 709447
+      },
+      {
+        "class_name": "UnitEntity",
+        "line": 1057581
+      }
+    ],
+    "class WeaponInfo": [
+      {
+        "class_name": "WeaponInfo",
+        "line": 1050834
+      }
+    ],
+    "DamageCalculation": []
+  },
+  "task_10_2_combat_formulas": {
+    "AttacksSystem.GetDamage": {
+      "class": "AttacksSystem",
+      "method": "GetDamage",
+      "line": 1057726,
+      "signature": "private CombatDmg GetDamage(UnitEntity target, CombatStats attackStats) { }",
+      "confidence": "LOW",
+      "confidence_reason": "Method found but body empty (IL2CPP limitation)",
+      "notes": "Method signature visible but implementation not extractable from dump"
+    }
+  }
+}
