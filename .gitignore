@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temp files
+*.tmp
+*.bak
+
+# Large files
+*.apk
+*.so
+*.dll
+dump.cs
+
+# Cache
+extraction_system/cache/
+extraction_system/checkpoints/
+extraction_system/logs/
+
+# Build artifacts
+dist-electron/
+build/
