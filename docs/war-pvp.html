@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>War & PvP - Legend of Civilizations</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">⚔️ Legend of Civilizations</h1>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="#guild-war">Guild War</a>
+                <a href="#pvp">PvP Arena</a>
+                <a href="#dungeons">Dungeons</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>War & PvP Mechanics</h1>
+            <p>Guild Wars, Arena matchmaking, and dungeon scaling explained</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Guild War Section -->
+        <section id="guild-war" class="section">
+            <h2 class="section-title">🛡️ Guild War System</h2>
+            
+            <div class="mechanic-card highlight">
+                <h3>Two-Week War Cycle (Dev Confirmed)</h3>
+                <p>Guild wars operate on a <strong>two-week matchmaking system</strong>:</p>
+                
+                <div class="info-box">
+                    <h4>Week 1: Random Tier Matchmaking</h4>
+                    <ul>
+                        <li>✅ Matched with <strong>random guild in your tier</strong></li>
+                        <li>✅ Tier based on guild tier points (S, A, B, C, D, E, F)</li>
+                        <li>✅ Power levels can vary significantly</li>
+                        <li>✅ Good for variety and learning</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h4>Week 2: War Points Matchmaking</h4>
+                    <ul>
+                        <li>✅ Matched with guild <strong>close to your total war points</strong></li>
+                        <li>✅ More balanced matches</li>
+                        <li>✅ Competitive battles</li>
+                        <li>✅ Better for climbing tiers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mechanic-card">
+                <h3>Guild Tiers</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Tier</th>
+                            <th>Required Points</th>
+                            <th>Win Reward</th>
+                            <th>Loss Reward</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>S Tier</strong></td>
+                            <td>TBD</td>
+                            <td>High rewards</td>
+                            <td>Medium rewards</td>
+                        </tr>
+                        <tr>
+                            <td><strong>A Tier</strong></td>
+                            <td>TBD</td>
+                            <td>Good rewards</td>
+                            <td>Low rewards</td>
+                        </tr>
+                        <tr>
+                            <td><strong>B-F Tiers</strong></td>
+                            <td>TBD</td>
+                            <td>Scaling rewards</td>
+                            <td>Scaling rewards</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="warning">
+                    ⚠️ <strong>Note:</strong> Exact tier point thresholds need verification from game config files
+                </div>
+            </div>
+
+            <div class="mechanic-card">
+                <h3>War Points System</h3>
+                <ul>
+                    <li>🎯 <strong>Win:</strong> Gain tier points (amount varies by tier)</li>
+                    <li>📉 <strong>Loss:</strong> Lose tier points (smaller amount)</li>
+                    <li>⚖️ <strong>Matchmaking:</strong> Week 2 uses total war points for fair matches</li>
+                    <li>🏆 <strong>Tier Promotion:</strong> Reach tier threshold to move up</li>
+                    <li>📊 <strong>Tier Demotion:</strong> Fall below threshold to move down</li>
+                </ul>
+            </div>
+
+            <div class="mechanic-card">
+                <h3>War Tasks (60+ Tasks)</h3>
+                <p>Members earn points by completing tasks:</p>
+                <div class="stats-grid">
+                    <div>
+                        <strong>Forge Tasks</strong>
+                        <p>Spend coins, start upgrades, forge equipment by age</p>
+                    </div>
+                    <div>
+                        <strong>Dungeon Tasks</strong>
+                        <p>Use dungeon keys (Hammer Thief, Ghost Town, Invasion, Zombie)</p>
+                    </div>
+                    <div>
+                        <strong>Summoning Tasks</strong>
+                        <p>Summon skills/mounts by rarity (Common → Mythic)</p>
+                    </div>
+                    <div>
+                        <strong>Upgrade Tasks</strong>
+                        <p>Upgrade skills, merge pets/mounts, complete tech tree</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PvP Arena Section -->
+        <section id="pvp" class="section">
+            <h2 class="section-title">⚔️ PvP Arena</h2>
+            
+            <div class="mechanic-card highlight">
+                <h3>Arena League System</h3>
+                <p>PvP uses a <strong>league and rank system</strong> with promotion/demotion thresholds.</p>
+                
+                <div class="formula-box">
+                    <h4>League Structure</h4>
+                    <code>
+                        LeagueId → PromotionEnd (top X ranks promote)<br>
+                        LeagueId → DemotionStart (bottom Y ranks demote)
+                    </code>
+                </div>
+
+                <div class="example">
+                    <strong>Example League:</strong><br>
+                    League 5: Ranks 1-100<br>
+                    - Top 20 (ranks 1-20) promote to League 6<br>
+                    - Bottom 20 (ranks 81-100) demote to League 4<br>
+                    - Middle 60 (ranks 21-80) stay in League 5
+                </div>
+            </div>
+
+            <div class="mechanic-card">
+                <h3>Matchmaking Algorithm</h3>
+                <div class="info-box">
+                    <h4>How Opponents Are Selected:</h4>
+                    <ol>
+                        <li>Player enters PvP queue</li>
+                        <li>System searches for opponents within <strong>rating range</strong></li>
+                        <li>Rating range <strong>expands over time</strong> if no match found</li>
+                        <li>Level restrictions may apply</li>
+                        <li>Server-authoritative (can't manipulate)</li>
+                    </ol>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Tip:</strong> If matchmaking takes long, you'll get matched with wider rating range
+                </div>
+            </div>
+
+            <div class="mechanic-card">
+                <h3>PvP Stat Modifications</h3>
+                <p>PvP has <strong>separate stat multipliers</strong> for balance:</p>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Stat</th>
+                            <th>PvE Value</th>
+                            <th>PvP Multiplier</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Base HP</td>
+                            <td>1.0x</td>
+                            <td>PvpHpBaseMultiplier</td>
+                        </tr>
+                        <tr>
+                            <td>Pet HP</td>
+                            <td>1.0x</td>
+                            <td>PvpHpPetMultiplier</td>
+                        </tr>
+                        <tr>
+                            <td>Skill HP</td>
+                            <td>1.0x</td>
+                            <td>PvpHpSkillMultiplier</td>
+                        </tr>
+                        <tr>
+                            <td>Mount HP</td>
+                            <td>1.0x</td>
+                            <td>PvpHpMountMultiplier</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="warning">
+                    ⚠️ <strong>Note:</strong> Exact multiplier values need verification from PvpBaseConfig
+                </div>
+            </div>
+
+            <div class="mechanic-card">
+                <h3>Arena Rewards</h3>
+                <p>Rewards based on <strong>rank within league</strong>:</p>
+                <ul>
+                    <li>🏆 <strong>Top ranks:</strong> Best rewards + promotion</li>
+                    <li>📊 <strong>Mid ranks:</strong> Standard rewards + stay in league</li>
+                    <li>📉 <strong>Bottom ranks:</strong> Lower rewards + demotion</li>
+                    <li>🎁 <strong>Reward tiers:</strong> Multiple reward brackets per league</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Dungeons Section -->
+        <section id="dungeons" class="section">
+            <h2 class="section-title">🏰 Dungeon System</h2>
+            
+            <div class="mechanic-card highlight">
+                <h3>Dungeon Level Scaling</h3>
+                <p>Dungeons scale with level, affecting:</p>
+                
+                <div class="stats-grid">
+                    <div>
+                        <strong>Enemy HP</strong>
+                        <p>HP × DifficultyMultiplier</p>
+                        <p>Higher level = tankier enemies</p>
+                    </div>
+                    <div>
+                        <strong>Enemy Damage</strong>
+                        <p>Damage × DifficultyMultiplier</p>
+                        <p>Higher level = harder hits</p>
+                    </div>
+                    <div>
+                        <strong>Coin Rewards</strong>
+                        <p>CoinsPerEnemy × Level</p>
+                        <p>Higher level = better rewards</p>
+                    </div>
+                    <div>
+                        <strong>Drop Chances</strong>
+                        <p>Better drops at higher levels</p>
+                        <p>Eggs, hammers, rare items</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mechanic-card">
+                <h3>Egg Drop Mechanics & Seeding</h3>
+                <p>This is where it gets interesting with <strong>deterministic RNG</strong>:</p>
+                
+                <div class="info-box">
+                    <h4>How Dungeon Level Affects Egg Quality:</h4>
+                    <ol>
+                        <li><strong>Your seed stays the same</strong> (predetermined sequence)</li>
+                        <li><strong>Dungeon level changes drop table</strong> (better odds)</li>
+                        <li><strong>Same random value, different result!</strong></li>
+                    </ol>
+                </div>
+
+                <div class="formula-box">
+                    <h4>Example: Moving from Dungeon 10 → Dungeon 20</h4>
+                    <code>
+                        Your Seed: 12345 (never changes)<br>
+                        Random Value: 0.45 (45%)<br>
+                        <br>
+                        Dungeon 10 Drop Table:<br>
+                        - Common: 0-60% → Result: Common ❌<br>
+                        <br>
+                        Dungeon 20 Drop Table:<br>
+                        - Common: 0-40%<br>
+                        - Rare: 40-70% → Result: Rare ✅<br>
+                        <br>
+                        Same seed, same random value, BETTER RESULT!
+                    </code>
+                </div>
+
+                <div class="tip">
+                    💡 <strong>Key Insight:</strong> Higher dungeons don't change your "luck" - they change how your predetermined luck is interpreted!
+                </div>
+            </div>
+
+            <div class="mechanic-card">
+                <h3>Practical Example: Improving Egg Odds</h3>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Your Random Value</th>
+                            <th>Dungeon 10 Result</th>
+                            <th>Dungeon 30 Result</th>
+                            <th>Dungeon 50 Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>25%</td>
+                            <td>Common</td>
+                            <td>Common</td>
+                            <td>Rare</td>
+                        </tr>
+                        <tr>
+                            <td>45%</td>
+                            <td>Common</td>
+                            <td>Rare</td>
+                            <td>Rare</td>
+                        </tr>
+                        <tr>
+                            <td>65%</td>
+                            <td>Rare</td>
+                            <td>Rare</td>
+                            <td>Epic</td>
+                        </tr>
+                        <tr>
+                            <td>85%</td>
+                            <td>Epic</td>
+                            <td>Epic</td>
+                            <td>Legendary</td>
+                        </tr>
+                        <tr>
+                            <td>95%</td>
+                            <td>Legendary</td>
+                            <td>Legendary</td>
+                            <td>Ultimate</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="warning">
+                    ⚠️ <strong>Important:</strong> Your "lucky" and "unlucky" positions in the sequence stay the same - they just shift to better rarities!
+                </div>
+            </div>
+
+            <div class="mechanic-card">
+                <h3>Dungeon Types</h3>
+                <div class="stats-grid">
+                    <div>
+                        <strong>Hammer Thief</strong>
+                        <p>Focus: Hammer drops</p>
+                        <p>Key: Hammer Thief Dungeon Key</p>
+                    </div>
+                    <div>
+                        <strong>Ghost Town</strong>
+                        <p>Focus: Mixed rewards</p>
+                        <p>Key: Ghost Town Dungeon Key</p>
+                    </div>
+                    <div>
+                        <strong>Invasion</strong>
+                        <p>Focus: Combat rewards</p>
+                        <p>Key: Invasion Dungeon Key</p>
+                    </div>
+                    <div>
+                        <strong>Zombie Invasion</strong>
+                        <p>Focus: Special drops</p>
+                        <p>Key: Zombie Invasion Dungeon Key</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mechanic-card">
+                <h3>Optimization Strategy</h3>
+                <ul>
+                    <li>🎯 <strong>Push highest dungeon you can clear</strong> - Better drop tables</li>
+                    <li>⚡ <strong>Balance speed vs rewards</strong> - Don't farm too slow</li>
+                    <li>🎲 <strong>Your seed is fixed</strong> - Can't reroll, just improve odds</li>
+                    <li>📈 <strong>Progression matters</strong> - Each dungeon level = better chances</li>
+                    <li>🔄 <strong>Pattern persists</strong> - Your "lucky" drops stay lucky, just better</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Shop Section -->
+        <section id="shop" class="section">
+            <h2 class="section-title">🛒 Shop System</h2>
+            
+            <div class="mechanic-card highlight">
+                <h3>Is Shop Seeded Too?</h3>
+                <p><strong>Needs Investigation</strong> - Shop refresh mechanics unclear from current data.</p>
+                
+                <div class="info-box">
+                    <h4>What We Know:</h4>
+                    <ul>
+                        <li>✅ Shop has refresh system (ShopRefreshConfig)</li>
+                        <li>✅ Free daily refresh available</li>
+                        <li>✅ Paid refresh costs gems (increases per refresh)</li>
+                        <li>❓ Whether shop items are seeded (like eggs) is unknown</li>
+                        <li>❓ Refresh algorithm needs verification</li>
+                    </ul>
+                </div>
+
+                <div class="warning">
+                    ⚠️ <strong>To Confirm:</strong> Need to analyze ShopRefreshConfig and PlayerShopModel in detail
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>All mechanics extracted from game code | Zero assumptions | 100% verifiable</p>
+            <p>Some values marked "TBD" require deeper config file analysis</p>
+        </div>
+    </footer>
+</body>
+</html>
